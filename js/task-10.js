@@ -12,61 +12,27 @@ const refs = {
   destroyButton: document.querySelector("button[data-destroy]"),
 };
 
-// console.log(refs);
-
 refs.createButton.addEventListener("click", createBoxes);
-refs.inputEl.addEventListener("input", checktedAmount);
-function checktedAmount(event) {
-  console.log(event.currentTarget.value);
-
-  createBoxes(event.currentTarget.value);
-}
 
 function createBoxes(amount) {
-  console.log(amount);
+  for (let i = 0; i < amount; i++) {
+    const box = document.createElement("div");
+    const size = 30 + i * 10;
+    box.style.width = `${size}px`;
+    box.style.height = `${size}px`;
+    box.style.backgroundColor = getRandomHexColor();
 
-  // function checktedAmount(event) {}
-
-  const createdEl = document.createElement("div");
-  createdEl.style.width = "30px";
-  createdEl.style.height = "30px";
-  createdEl.style.backgroundColor = getRandomHexColor();
-  // console.log(createdEl);
-
-  refs.boxesContainer.append(createdEl);
+    refs.boxesContainer.append(box);
+  }
 }
 
-// function createBoxes(amount) {
-//   // console.log(amount);
+function destroyBoxes() {
+  refs.boxesContainer.innerHTML = "";
+}
 
-//   // function checktedAmount(event) {}
+refs.createButton.addEventListener("click", () => {
+  const amountEl = Number(refs.inputEl.value);
+  createBoxes(amountEl);
+});
 
-//   const createdEl = document.createElement("div");
-//   createdEl.style.width = "30px";
-//   createdEl.style.height = "30px";
-//   createdEl.style.backgroundColor = getRandomHexColor();
-//   // console.log(createdEl);
-
-//   refs.boxesContainer.append(createdEl);
-// }
-
-// refs.destroyButton.addEventListener("click", destroyBoxes);
-
-// function destroyBoxes() {
-//   createdEl.remove();
-// }
-// function createBoxes(amount) {
-//   console.log(amount);
-//   const createdEl = document.createElement("div");
-//   createdEl.style.width = "30px";
-//   createdEl.style.height = "30px";
-//   createdEl.style.backgroundColor = getRandomHexColor();
-//   console.log(createdEl);
-//   // refs.boxesContainer.append(createdEl);
-// }
-
-// createBoxes(refs.inputEl.textContent);
-
-// refs.destroyButton.addEventListener("click", destroyBoxes);
-
-// function destroyBoxes() {}
+refs.destroyButton.addEventListener("click", destroyBoxes);
