@@ -14,6 +14,7 @@ const refs = {
 
 refs.createButton.addEventListener("click", createBoxes);
 
+let boxes = [];
 function createBoxes(amount) {
   for (let i = 0; i < amount; i++) {
     const box = document.createElement("div");
@@ -21,9 +22,9 @@ function createBoxes(amount) {
     box.style.width = `${size}px`;
     box.style.height = `${size}px`;
     box.style.backgroundColor = getRandomHexColor();
-
-    refs.boxesContainer.append(box);
+    boxes.push(box);
   }
+  refs.boxesContainer.append(...boxes);
 }
 
 function destroyBoxes() {
